@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="" />
+    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Follower.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Follower.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Tweet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tweet.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +22,9 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -100,6 +113,9 @@
     </include_path>
   </component>
   <component name="ProjectId" id="1YRCOcZ0a6yV6kbdJ6iaUQUhbvU" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -107,11 +123,15 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="settings.editor.selected.configurable" value="web-ide.project.structure" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/storage/app/public" />
+      <recent name="$PROJECT_DIR$/public" />
       <recent name="$PROJECT_DIR$/app/Models" />
     </key>
   </component>
@@ -132,7 +152,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582895988824</updated>
       <workItem from="1582895990465" duration="20644000" />
-      <workItem from="1583111870200" duration="6164000" />
+      <workItem from="1583111870200" duration="16913000" />
     </task>
     <servers />
   </component>
@@ -148,9 +168,14 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1583111871632" />
-    <state x="-1280" y="264" width="639" height="729" key="find.popup" timestamp="1583126322741">
+    <state x="-1280" y="264" width="639" height="729" key="find.popup" timestamp="1583138060666">
       <screen x="-1920" y="89" width="1920" height="1080" />
     </state>
-    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583126322741" />
+    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583138060666" />
+    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.23.1440.877/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583136457991" />
+    <state x="-1295" y="330" width="670" height="676" key="search.everywhere.popup" timestamp="1583127864735">
+      <screen x="-1920" y="89" width="1920" height="1080" />
+    </state>
+    <state x="-1295" y="330" width="670" height="676" key="search.everywhere.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583127864735" />
   </component>
 </project>

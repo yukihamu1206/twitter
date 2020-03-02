@@ -52,10 +52,36 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(User $user, Tweet $tweet, Follower $follower)
     {
-        //
+        #今ログインしているuser
+        $login_user = auth()->user();
+        #フォローしているユーザー
+        $is_following = $login_user->isFollowing($user->id);
+        #フォロワー
+        $is_followed = $login_user->isFollowed($user->id);
+        #tweet全部取得　
+        $timelines = $tweet->getUserTimeLines($user->id);
+        #tweet数
+        $tweet_count = $tweet->getTweetCount($user->id);
+        #フォロー数
+        $follow_count = $follower->getFollowCount($user->id);
+        #フォロワー数
+        $follower_count = $follower->getFollowerCount($user->id);
+
+
+        return view('users.show',[
+            'user' => $user,
+            'is_following' => $is_following,
+            'is_followed' => $is_followed,
+            'timelines' => $timelines,
+            'tweet_count' => $tweet_count,
+            'follow_count' => $follow_count,
+            'follower_count' => $follower_count
+        ]);
     }
+
+
 
     /**
      * Show the form for editing the specified resource.
