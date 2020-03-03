@@ -68,7 +68,7 @@ class TweetsController extends Controller
 
         return redirect('tweets');
     }
-˚kk
+
     /**
      * Display the specified resource.
      *
@@ -94,7 +94,7 @@ class TweetsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int
      * @return \Illuminate\Http\Response
      */
     public function edit(Tweet $tweet)

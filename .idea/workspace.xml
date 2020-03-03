@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="j">
+    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Tweet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tweet.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,8 +147,23 @@
       <updated>1582895988824</updated>
       <workItem from="1582895990465" duration="20644000" />
       <workItem from="1583111870200" duration="22917000" />
-      <workItem from="1583197376347" duration="26044000" />
+      <workItem from="1583197376347" duration="26254000" />
     </task>
+    <task id="LOCAL-00001" summary="fddf">
+      <created>1583231431821</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1583231431821</updated>
+    </task>
+    <task id="LOCAL-00002" summary="jasdasdasdsa">
+      <created>1583231482889</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1583231482889</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,23 +184,29 @@
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="j" />
-    <option name="LAST_COMMIT_MESSAGE" value="j" />
+    <MESSAGE value="fddf" />
+    <MESSAGE value="jasdasdasdsa" />
+    <option name="LAST_COMMIT_MESSAGE" value="jasdasdasdsa" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="85" y="52" width="1334" height="795" key="CommitChangelistDialog2" timestamp="1583231431460">
+    <state x="85" y="52" width="1334" height="795" key="CommitChangelistDialog2" timestamp="1583231482725">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="85" y="52" width="1334" height="795" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1583231431460" />
-    <state x="144" y="78" key="DiffContextDialog" timestamp="1583231293104">
+    <state x="85" y="52" width="1334" height="795" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1583231482725" />
+    <state x="144" y="78" key="DiffContextDialog" timestamp="1583231562005">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1583231293104" />
+    <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1583231562005" />
     <state x="221" y="89" key="SettingsEditor" timestamp="1583231408123">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="-1625" y="195" key="SettingsEditor/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583225925882" />
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1583231408123" />
     <state x="295" y="106" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1583229889381" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1583231563630">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1583231563630" />
     <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog" timestamp="1583197378114">
       <screen x="-1920" y="89" width="1920" height="1080" />
     </state>
