@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="d-inline-flex">
                         <div class="p-3 d-flex flex-column">
-                            <img src="{{ $user->profile_image }}" class="rounded-circle" width="100" height="100">
+                            <img src="{{ asset('storage/profile_image/'.$user->profile_image) }}" class="rounded-circle" width="100" height="100">
                             <div class="mt-3 d-flex flex-column">
                                 <h4 class="mb-0 font-weight-bold">{{ $user->name }}</h4>
                                 <span class="text-secondary">{{ $user->screen_name }}</span>
@@ -93,7 +93,7 @@
                                 @endif
                                 <div class="mr-3 d-flex align-items-center">
                                     <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                    <p class="mb-0 text-secondary">{{ count($timeline->comments) }}</p>
+                                    <p class="mb-0 text-secondary">{{ couct($timeline->commens) }}</p>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <a href="#"><i class="far fa-comment fa-fw"></i></a>
