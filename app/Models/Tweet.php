@@ -44,7 +44,7 @@ class Tweet extends Model
         $follow_ids[] = $user_id;
         return $this->whereIn('user_id',$follow_ids)->orderBy('created_at','DESC')->paginate(50);
     }
-    #書斎ページのツイートを取得
+    #詳細ページのツイートを取得
     public function getTweet(Int $tweet_id)
     {
         return $this->with('user')->where('id', $tweet_id)->first();
