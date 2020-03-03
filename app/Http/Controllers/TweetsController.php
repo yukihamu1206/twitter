@@ -23,10 +23,11 @@ class TweetsController extends Controller
         $user = auth()->user();
         //フォローしている　userのIDを持ってくる
         $follow_ids = $follower->followingIds($user->id);
-        //following_idだけ抜き出す
-        $following_ids = $follow_ids->pluck('followed_id')->toArray();
-        //自分とフォロワーを表示する
+
+        $following_ids = $follow_ids->toArray();
+
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
+        Log::debug($timelines);
 
         return view('tweets.index', [
             'user' => $user,
@@ -76,9 +77,11 @@ class TweetsController extends Controller
      */
     public function show(Tweet $tweet, Comment $comment)
     {
+        Log::debug($tweet);
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
+
 
         return view('tweets.show',[
             'user'=>$user,
