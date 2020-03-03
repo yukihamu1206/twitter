@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'],function(){
     Route::delete('user/{user}/unfollow','UsersController@unfollow')->name('unfollow');
     #コメント
     Route::resource('comments','CommentsController',['only' => ['store']]);
+    #いいね
+    Route::resource('favorites','FavoritesController',['only' => ['store','destroy']]);
 });
 
 
