@@ -93,7 +93,7 @@
                                 @endif
                                 <div class="mr-3 d-flex align-items-center">
                                     <a href="#"><i class="far fa-comment fa-fw"></i></a>
-                                    <p class="mb-0 text-secondary">{{ couct($timeline->commens) }}</p>
+                                    <p class="mb-0 text-secondary">{{ count($timeline->commens) }}</p>
                                 </div>
                                 <div class="d-flex align-items-center">
                                     <a href="#"><i class="far fa-comment fa-fw"></i></a>

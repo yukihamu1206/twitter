@@ -8,7 +8,7 @@
                     <div class="card-header">Update</div>
 
                     <div class="card-body">
-                        <form method="POST" action="{{ url('users/' .$user->id) }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ url('users/'.$user->id) }}"  enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
 

@@ -84,7 +84,14 @@ class User extends Authenticatable
                 ->update([
                     'screen_name' => $params['screen_name'],
                     'name' => $params['name'],
-                    'profile_image' => basename('file_name'),
+                    'profile_image' => basename($file_name),
+                    'email' => $params['email'],
+                ]);
+        }else{
+            $this::where('id',$this->id)
+                ->update([
+                    'screen_name' => $params['screen_name'],
+                    'name' => $params['name'],
                     'email' => $params['email'],
                 ]);
         }

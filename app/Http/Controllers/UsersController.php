@@ -8,6 +8,7 @@ use Illuminate\Validation\Rule;
 use App\Models\User;
 use App\Models\Tweet;
 use App\Models\Follower;
+use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -54,6 +55,7 @@ class UsersController extends Controller
      */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
+
         #今ログインしているuser
         $login_user = auth()->user();
         #フォローしているユーザー
@@ -90,8 +92,9 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
+
     {
-        return view('users.edit',['users' => '$user']);
+        return view('users.edit',['user' => $user]);
     }
 
     /**
@@ -112,7 +115,6 @@ class UsersController extends Controller
         ]);
         $validator->validate();
         $user->updateProfile($data);
-
         return redirect('users/'.$user->id);
     }
 

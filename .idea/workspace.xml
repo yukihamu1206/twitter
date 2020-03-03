@@ -3,12 +3,21 @@
   <component name="ChangeListManager">
     <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/ResetPasswordController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Auth/VerificationController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/TweetsController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Middleware/RedirectIfAuthenticated.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Comment.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Comment.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Follower.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Follower.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Models/Tweet.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Tweet.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Models/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/images/noimage.jpeg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/users/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/edit.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/users/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,6 +136,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/storage/app/public/profile_image" />
       <recent name="$PROJECT_DIR$/public/images" />
       <recent name="$PROJECT_DIR$/storage/app/public" />
       <recent name="$PROJECT_DIR$/public" />
@@ -151,7 +161,7 @@
       <updated>1582895988824</updated>
       <workItem from="1582895990465" duration="20644000" />
       <workItem from="1583111870200" duration="22917000" />
-      <workItem from="1583197376347" duration="378000" />
+      <workItem from="1583197376347" duration="21659000" />
     </task>
     <servers />
   </component>
@@ -159,20 +169,29 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="221" y="89" key="SettingsEditor" timestamp="1582897588554">
+    <state x="303" y="52" key="CommitChangelistDialog2" timestamp="1583210291097">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="303" y="52" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1583210291097" />
+    <state x="144" y="78" key="DiffContextDialog" timestamp="1583210289940">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="144" y="78" key="DiffContextDialog/0.0.1440.900@0.0.1440.900" timestamp="1583210289940" />
+    <state x="-1625" y="195" key="SettingsEditor" timestamp="1583225925882">
+      <screen x="-1920" y="89" width="1920" height="1080" />
+    </state>
+    <state x="-1625" y="195" key="SettingsEditor/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583225925882" />
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1582897588554" />
     <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog" timestamp="1583197378114">
       <screen x="-1920" y="89" width="1920" height="1080" />
     </state>
     <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583197378114" />
     <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1583111871632" />
-    <state x="-1280" y="264" width="639" height="729" key="find.popup" timestamp="1583151475431">
-      <screen x="-1920" y="89" width="1920" height="1080" />
+    <state x="480" y="146" width="683" height="608" key="find.popup" timestamp="1583209961307">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583151475431" />
-    <state x="480" y="146" width="683" height="608" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583141420966" />
+    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583206561614" />
+    <state x="480" y="146" width="683" height="608" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583209961307" />
     <state x="-1280" y="264" width="639" height="729" key="find.popup/0.23.1440.877/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583136457991" />
     <state x="-1295" y="330" width="670" height="676" key="search.everywhere.popup" timestamp="1583127864735">
       <screen x="-1920" y="89" width="1920" height="1080" />
