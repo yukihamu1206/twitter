@@ -1,4 +1,4 @@
-es/views/tweets/show.blade.php
+
 @extends('layouts.app')
 
 @section('content')
@@ -7,7 +7,11 @@ es/views/tweets/show.blade.php
             <div class="col-md-8 mb-3">
                 <div class="card">
                     <div class="card-haeder p-3 w-100 d-flex">
-                        <img src="{{ asset('storage/profile_image/' .$tweet->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                        @if($tweet->user->profile_image)
+                            <img src="{{  asset('storage/profile_image/'.$tweet->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                        @else
+                            <img src="{{  asset('storage/profile_image/aaa.jpg') }}" class="rounded-circle" width="50" height="50">
+                        @endif
                         <div class="ml-2 d-flex flex-column">
                             <p class="mb-0">{{ $tweet->user->name }}</p>
                             <a href="{{ url('users/' .$tweet->user->id) }}" class="text-secondary">{{ $tweet->user->screen_name }}</a>
@@ -40,10 +44,42 @@ es/views/tweets/show.blade.php
                             <a href="{{ url('tweets/' .$tweet->id) }}"><i class="far fa-comment fa-fw"></i></a>
                             <p class="mb-0 text-secondary">{{ count($tweet->comments) }}</p>
                         </div>
-                        <div class="d-flex align-items-center">
-                            <button type="" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
-                            <p class="mb-0 text-secondary">{{ count($tweet->favorites) }}</p>
-                        </div>
+
+{{--                            いいね--}}
+                            <div class="d-flex align-items-center">
+                                @if($tweet->favorites !== null)
+                                    @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
+                                        <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
+                                            @csrf
+
+                                            <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
+                                            <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                        </form>
+                                    @else
+                                        <form method="POST" action="{{ url('favorites/'.$tweet->favorites->where('user_id',$user->id)->first()->id)}}" class="mb-0">
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
+                                        @csrf
+
+                                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
+                                        <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                    </form>
+                                @endif
+
+                                @if($tweet->favorites ==null)
+                                    <p class="mb-0 text-secondary">0</p>
+                                @else
+                                    <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
+                                @endif
+                            </div>
+
                     </div>
                 </div>
             </div>
@@ -55,7 +91,11 @@ es/views/tweets/show.blade.php
                     @forelse ($comments as $comment)
                         <li class="list-group-item">
                             <div class="py-3 w-100 d-flex">
-                                <img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                @if($comment->user->profile_image)
+                                    <img src="{{ asset('storage/profile_image/' .$comment->user->profile_image) }}" class="rounded-circle" width="50" height="50">
+                                @else
+                                    <img src="{{ asset('storage/profile_image/aaa.jpg') }}" class="rounded-circle" width="50" height="50">
+                                @endif
                                 <div class="ml-2 d-flex flex-column">
                                     <p class="mb-0">{{ $comment->user->name }}</p>
                                     <a href="{{ url('users/' .$comment->user->id) }}" class="text-secondary">{{ $comment->user->screen_name }}</a>

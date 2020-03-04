@@ -20,7 +20,7 @@ class Tweet extends Model
 
     public function favorites()
     {
-        return $this->belongsTo(Favorite::class);
+        return $this->hasMany(Favorite::class);
     }
 
     public function comments()

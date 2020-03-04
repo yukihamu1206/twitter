@@ -23,4 +23,14 @@ class Favorite extends Model
         return;
     }
 
+    public function destroyFavorite(Int $favorite_id)
+    {
+        return $this->where('id',$favorite_id)->delete();
+    }
+
+    public function favoriteCount($tweet_id)
+    {
+        return $this->where('tweet_id',$tweet_id)->count();
+    }
+
 }
