@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="aaa">
+    <list default="true" id="93a7e193-8318-48fd-978e-ed4f3249b135" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Models/Favorite.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Models/Favorite.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tweets/create.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tweets/create.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tweets/edit.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tweets/edit.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tweets/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tweets/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/tweets/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/tweets/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/users/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/users/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +147,9 @@
       <updated>1582895988824</updated>
       <workItem from="1582895990465" duration="20644000" />
       <workItem from="1583111870200" duration="22917000" />
-      <workItem from="1583197376347" duration="28955000" />
+      <workItem from="1583197376347" duration="33372000" />
+      <workItem from="1583239784723" duration="80000" />
+      <workItem from="1583285686569" duration="7080000" />
     </task>
     <task id="LOCAL-00001" summary="fddf">
       <created>1583231431821</created>
@@ -177,7 +172,21 @@
       <option name="project" value="LOCAL" />
       <updated>1583231627722</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="画像登録なしの画像">
+      <created>1583234752995</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1583234752995</updated>
+    </task>
+    <task id="LOCAL-00005" summary="finish">
+      <created>1583292403522</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1583292403522</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -188,7 +197,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -201,13 +212,15 @@
     <MESSAGE value="fddf" />
     <MESSAGE value="jasdasdasdsa" />
     <MESSAGE value="aaa" />
-    <option name="LAST_COMMIT_MESSAGE" value="aaa" />
+    <MESSAGE value="画像登録なしの画像" />
+    <MESSAGE value="finish" />
+    <option name="LAST_COMMIT_MESSAGE" value="finish" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="-1807" y="151" width="1334" height="795" key="CommitChangelistDialog2" timestamp="1583232346790">
+    <state x="-1807" y="151" width="1334" height="795" key="CommitChangelistDialog2" timestamp="1583292403277">
       <screen x="-1920" y="89" width="1920" height="1080" />
     </state>
-    <state x="-1807" y="151" key="CommitChangelistDialog2/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583232346790" />
+    <state x="-1807" y="151" key="CommitChangelistDialog2/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583292403277" />
     <state x="85" y="52" width="1334" height="795" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1583231627552" />
     <state x="144" y="78" key="DiffContextDialog" timestamp="1583231562005">
       <screen x="0" y="0" width="1440" height="900" />
@@ -219,19 +232,21 @@
     <state x="-1625" y="195" key="SettingsEditor/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583225925882" />
     <state x="221" y="89" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1583231408123" />
     <state x="295" y="106" key="SettingsEditor/0.0.1920.1080@0.0.1920.1080" timestamp="1583229889381" />
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1583231563630">
-      <screen x="0" y="0" width="1440" height="900" />
-    </state>
-    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1583231563630" />
-    <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog" timestamp="1583197378114">
+    <state x="-1493" y="317" key="Vcs.Push.Dialog.v2" timestamp="1583292410598">
       <screen x="-1920" y="89" width="1920" height="1080" />
     </state>
-    <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583197378114" />
-    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1583111871632" />
-    <state x="480" y="146" width="683" height="608" key="find.popup" timestamp="1583209961307">
+    <state x="-1493" y="317" key="Vcs.Push.Dialog.v2/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583292410598" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900@0.0.1440.900" timestamp="1583231563630" />
+    <state x="397" y="282" key="com.intellij.ide.util.TipDialog" timestamp="1583285693420">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583206561614" />
+    <state x="-1391" y="427" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583197378114" />
+    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900/-1920.89.1920.1080@0.0.1440.900" timestamp="1583285693420" />
+    <state x="397" y="282" key="com.intellij.ide.util.TipDialog/0.0.1440.900@0.0.1440.900" timestamp="1583239785357" />
+    <state x="-1280" y="264" width="639" height="729" key="find.popup" timestamp="1583292328783">
+      <screen x="-1920" y="89" width="1920" height="1080" />
+    </state>
+    <state x="-1280" y="264" width="639" height="729" key="find.popup/0.0.1440.900/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583292328783" />
     <state x="480" y="146" width="683" height="608" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1583209961307" />
     <state x="-1280" y="264" width="639" height="729" key="find.popup/0.23.1440.877/-1920.89.1920.1080@-1920.89.1920.1080" timestamp="1583136457991" />
     <state x="406" y="248" key="git4idea.merge.GitPullDialog" timestamp="1583231120214">
