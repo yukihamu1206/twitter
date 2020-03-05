@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('comments','CommentsController',['only' => ['store']]);
     #いいね
     Route::resource('favorites','FavoritesController',['only' => ['store','destroy']]);
+    Route::post('async/favorites','FavoritesController@storeAsync');
 });
 
 

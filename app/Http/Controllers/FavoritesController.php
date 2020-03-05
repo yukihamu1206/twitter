@@ -31,7 +31,8 @@ class FavoritesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Favorite $favorite)
     {
@@ -46,6 +47,35 @@ class FavoritesController extends Controller
 
         return back();
 
+    }
+
+    /**
+     * [API] Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Models\Favorite  $favorite
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function storeAsync(Request $request, Favorite $favorite)
+    {
+        $user        = auth()->user();
+        $tweet_id    = $request->post('tweet_id');
+        $is_favorite = $favorite->isFavorite($user->id, $tweet_id);
+
+        if ( ! $is_favorite) {
+            // いいねをつける
+            $favorite->storeFavorite($user->id, $tweet_id);
+
+            return response()->json([
+                'result' => true
+            ]);
+        } else {
+            // すでにいいね済みの場合
+            return response()->json([
+                'result' => false
+            ]);
+        }
     }
 
     /**

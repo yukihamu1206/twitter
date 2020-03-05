@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Favorite extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
 
     #いいねしているかどうかの判定処理
     public function isFavorite(Int $user_id, Int $tweet_id)
@@ -19,8 +19,6 @@ class Favorite extends Model
         $this->user_id = $user_id;
         $this->tweet_id = $tweet_id;
         $this->save();
-
-        return;
     }
 #いいね取り消し
     public function destroyFavorite(Int $favorite_id)

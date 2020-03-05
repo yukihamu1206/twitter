@@ -23,6 +23,7 @@
                     <div class="card-body">
                         {!! nl2br(e($tweet->text)) !!}
                     </div>
+
                     <div class="card-footer py-1 d-flex justify-content-end bg-white">
                         @if ($tweet->user->id === Auth::user()->id)
                             <div class="dropdown mr-3 d-flex align-items-center">
@@ -40,84 +41,85 @@
                                 </div>
                             </div>
                         @endif
+
                         <div class="mr-3 d-flex align-items-center">
                             <a href="{{ url('tweets/' .$tweet->id) }}"><i class="far fa-comment fa-fw"></i></a>
                             <p class="mb-0 text-secondary">{{ count($tweet->comments) }}</p>
                         </div>
 
+                        <div class="d-flex align-items-center">
+    {{--                        tweetにいいねがあった場合--}}
+                            @if($tweet->favorites !== null)
+    {{--                            自分はまだいいねしていない--}}
+                                @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
+                                    <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
 
+                                @else
+    {{--                                いいねしている--}}
+                                    <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
 
-
-                    <div class="d-flex align-items-center">
-{{--                        tweetにいいねがあった場合--}}
-                        @if($tweet->favorites !== null)
-{{--                            自分はまだいいねしていない--}}
-                            @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
+                                @endif
+    {{--                            tweetにいいねがない--}}
+                            @else
                                 <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
-
-                            @else
-{{--                                いいねしている--}}
-                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
-
                             @endif
-{{--                            tweetにいいねがない--}}
-                        @else
-                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
-                        @endif
-{{--                        いいね数--}}
-                        @if($tweet->favorites ==null)
-{{--                        もしいいねがなかったら0を表示--}}
-                            <p class="mb-0 text-secondary">0</p>
-                        @else
-{{--                            いいねがあったらいいね数表示--}}
-                            <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
-                        @endif
-                    </div>
-
-                            @if($favorite==null)
-                                <script>
-                                    $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites') }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "POST",
-                                                success: function (data) {
-                                                    $(this).children('i').addClass('fas');
-
-                                                }
-                                            })
-                                        });
-                                    });
-                                </script>
+    {{--                        いいね数--}}
+                            @if($tweet->favorites ==null)
+    {{--                        もしいいねがなかったら0を表示--}}
+                                <p class="mb-0 text-secondary">0</p>
                             @else
-                                <script>
-                                    $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites/'.$favorite->id) }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "DELETE",
-                                                success: function (data) {
-                                                    $(this).children('i').addClass('far');
-
-                                                }
-                                            })
-                                        });
-                                    });
-                                </script>
+    {{--                            いいねがあったらいいね数表示--}}
+                                <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
                             @endif
-                    </div>
+                        </div>
+
+                        @if($favorite==null)
+                            <script>
+                                $(function() {
+                                    $(".favorite").click(function (e) {
+                                        $.ajax({
+                                            url: "{{ url('async/favorites') }}",
+                                            data: {
+                                                _token: "{{ csrf_token() }}",
+                                                tweet_id: "{{ $tweet->id }}",
+                                            },
+                                            type: "POST",
+                                            success: function (data) {
+                                                if(data['result'] === true) {
+                                                    let heart = $(".fa-heart");
+                                                    heart.removeClass('far');
+                                                    heart.addClass('fas');
+                                                }
+                                            }
+                                        })
+                                    });
+                                });
+                            </script>
+                        @else
+                            <script>
+                                $(function() {
+                                    $(".favorite").click(function (e) {
+                                        $.ajax({
+                                            url: "{{ url('/favorites/'.$favorite->id) }}",
+                                            data: {
+                                                _token: "{{ csrf_token() }}",
+                                                tweet_id: "{{ $tweet->id }}",
+                                            },
+                                            type: "DELETE",
+                                            success: function (data) {
+                                                $(this).children('i').addClass('far');
+
+                                            }
+                                        })
+                                    });
+                                });
+                            </script>
+                        @endif
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 
 
         <div class="row justify-content-center">
