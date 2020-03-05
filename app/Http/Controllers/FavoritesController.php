@@ -100,7 +100,7 @@ class FavoritesController extends Controller
             return back();
         }
 
-        return back;
+        return back();
 
     }
 }

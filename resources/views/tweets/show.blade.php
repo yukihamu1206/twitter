@@ -45,45 +45,74 @@
                             <p class="mb-0 text-secondary">{{ count($tweet->comments) }}</p>
                         </div>
 
-{{--                            いいね--}}
-                            <div class="d-flex align-items-center">
-                                @if($tweet->favorites !== null)
-                                    @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
-                                        <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
-                                            @csrf
 
-                                            <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                                            <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
-                                        </form>
-                                    @else
-                                        <form method="POST" action="{{ url('favorites/'.$tweet->favorites->where('user_id',$user->id)->first()->id)}}" class="mb-0">
 
-                                            @csrf
-                                            @method('DELETE')
 
-                                            <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
-                                        </form>
-                                    @endif
-                                @else
-                                    <form method="POST" action="{{ url('favorites/') }}" class="mb-0">
-                                        @csrf
+                    <div class="d-flex align-items-center">
+                        @if($tweet->favorites !== null)
+                            @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
+                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
 
-                                        <input type="hidden" name="tweet_id" value="{{ $tweet->id }}">
-                                        <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
-                                    </form>
-                                @endif
+                            @else
+                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
 
-                                @if($tweet->favorites ==null)
-                                    <p class="mb-0 text-secondary">0</p>
-                                @else
-                                    <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
-                                @endif
-                            </div>
+                            @endif
+                        @else
+                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
+                        @endif
 
+                        @if($tweet->favorites ==null)
+                            <p class="mb-0 text-secondary">0</p>
+                        @else
+                            <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
+                        @endif
+                    </div>
+
+                            @if($favorite==null)
+                                <script>
+                                    $(function() {
+                                        $(".favorite").click(function (e) {
+                                            $.ajax({
+                                                url: "{{ url('/favorites') }}",
+                                                data: {
+                                                    _token: "{{ csrf_token() }}",
+                                                    tweet_id: "{{ $tweet->id }}",
+                                                },
+                                                type: "POST",
+                                                success: function (data) {
+                                                    $(this).children('i').addClass('fas');
+
+                                                }
+                                            })
+                                        });
+                                    });
+                                </script>
+                            @else
+                                <script>
+                                    $(function() {
+                                        $(".favorite").click(function (e) {
+                                            $.ajax({
+                                                url: "{{ url('/favorites/'.$favorite->id) }}",
+                                                data: {
+                                                    _token: "{{ csrf_token() }}",
+                                                    tweet_id: "{{ $tweet->id }}",
+                                                },
+                                                type: "DELETE",
+                                                success: function (data) {
+                                                    $(this).children('i').addClass('far');
+
+                                                }
+                                            })
+                                        });
+                                    });
+                                </script>
+                            @endif
+                    </div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <div class="row justify-content-center">
             <div class="col-md-8 mb-3">
