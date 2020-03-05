@@ -13,7 +13,7 @@ class Favorite extends Model
     {
         return (boolean) $this->where('user_id',$user_id)->where('tweet_id',$tweet_id)->first();
     }
-
+    #いいねをする
     public function storeFavorite(Int $user_id, Int $tweet_id)
     {
         $this->user_id = $user_id;
@@ -22,7 +22,7 @@ class Favorite extends Model
 
         return;
     }
-
+#いいね取り消し
     public function destroyFavorite(Int $favorite_id)
     {
         return $this->where('id',$favorite_id)->delete();

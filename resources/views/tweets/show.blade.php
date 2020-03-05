@@ -49,21 +49,27 @@
 
 
                     <div class="d-flex align-items-center">
+{{--                        tweetにいいねがあった場合--}}
                         @if($tweet->favorites !== null)
+{{--                            自分はまだいいねしていない--}}
                             @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
                                 <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
 
                             @else
+{{--                                いいねしている--}}
                                 <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
 
                             @endif
+{{--                            tweetにいいねがない--}}
                         @else
                             <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
                         @endif
-
+{{--                        いいね数--}}
                         @if($tweet->favorites ==null)
+{{--                        もしいいねがなかったら0を表示--}}
                             <p class="mb-0 text-secondary">0</p>
                         @else
+{{--                            いいねがあったらいいね数表示--}}
                             <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
                         @endif
                     </div>
