@@ -77,16 +77,20 @@ class TweetsController extends Controller
      */
     public function show(Tweet $tweet, Comment $comment)
     {
-        Log::debug($tweet);
+
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
         $comments = $comment->getComments($tweet->id);
+        $favorite = $tweet->favorites->where('user_id',$user->id)->first();
+
+        Log::debug($favorite);
 
 
         return view('tweets.show',[
             'user'=>$user,
             'tweet'=>$tweet,
-            'comments'=>$comments
+            'comments'=>$comments,
+            'favorite' => $favorite
         ]);
 
     }

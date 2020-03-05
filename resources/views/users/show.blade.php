@@ -117,7 +117,7 @@
                                                     @csrf
 
                                                     <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                                                    <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                                    <button type="submit" class="btn p-0 border-0 text-primary" class="favorites_button"><i class="far fa-heart fa-fw"></i></button>
                                                 </form>
                                             @else
                                                 <form method="POST" action="{{ url('favorites/'.$timeline->favorites->where('user_id',auth()->user()->id)->first()->id)}}" class="mb-0">
@@ -125,7 +125,7 @@
                                                     @csrf
                                                     @method('DELETE')
 
-                                                    <button type="submit" class="btn p-0 border-0 text-danger"><i class="fas fa-heart fa-fw"></i></button>
+                                                    <button type="submit" class="btn p-0 border-0 text-danger" class="favorites_button"><i class="fas fa-heart fa-fw"></i></button>
                                                 </form>
                                             @endif
                                         @else
@@ -133,7 +133,7 @@
                                                 @csrf
 
                                                 <input type="hidden" name="tweet_id" value="{{ $timeline->id }}">
-                                                <button type="submit" class="btn p-0 border-0 text-primary"><i class="far fa-heart fa-fw"></i></button>
+                                                <button type="submit" class="btn p-0 border-0 text-primary" class="favorites_button"><i class="far fa-heart fa-fw"></i></button>
                                             </form>
                                         @endif
 
@@ -143,6 +143,38 @@
                                                 <p class="mb-0 text-secondary">{{ count($timeline->favorites->toArray()) }}</p>
                                             @endif
                                     </div>
+
+
+                                    <script>
+                                        $(function(){
+                                            $('.favorites_button').click(function(){
+                                                $.ajax({
+                                                    url:"{{ action('FavoritesController@store') }}",
+                                                    type:'POST',
+                                                    data: {
+                                                        "_token": "{{ csrf_token() }}",
+                                                        'tweet_id': tweet_id ,
+                                                        'user_id' : user_id
+                                                    },
+                                                    success: function(data) {
+                                                        if (data.status == 'success') {
+                                                            console.log("success!!!");
+                                                        } else {
+                                                            console.log("errrrrorrrrr!!!!!!");
+                                                        }
+                                                    }
+                                                })
+                                            });
+
+                                        })
+                                    </script>
+
+
+
+
+
+
+
                             </div>
                         </div>
                     </div>
