@@ -30,11 +30,14 @@
         }
     },
     "image": "heroku/ruby",
-    "addons": [
-        "openredis",
+            "as": "MONGO"
+        },
         {
-            "plan": "cleardb",
-        }
+            "plan": "heroku-postgresql",
+            "options": {
+                "version": "9.5"
+            }
+        }	        }
     ],
     "buildpacks": [
         {

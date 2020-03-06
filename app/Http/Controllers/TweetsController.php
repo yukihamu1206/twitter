@@ -16,7 +16,7 @@ class TweetsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index(Tweet $tweet, Follower $follower)
     {
@@ -28,24 +28,54 @@ class TweetsController extends Controller
 
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
 
+        $lists = [];
+        foreach($timelines as $timeline){
+            $elm = [
+                'tweet_text' => $timeline->text,
+                'created_at' => $timeline->created_at->format('Y-m-d H:i'),
+                'profile_image' => $timeline->user->profime_image != null ? $timeline->user->profile_image : 'aaa.jpg',
+                'tweet_id' =>$timeline->id,
+                'user' => $timeline->user,
+                'user_id' => $timeline->user->id,
+                'user_name' => $timeline->user->name,
+                'screen_name' => $timeline->user->screen_name,
+                'comment_count' => $timeline->comments->count(),
+                'favorite' => $timeline->favorites,
+                'user_favorite' => $timeline->favorites->where('user_id',auth()->user()->id)->first(),
+                'favorite_count' => $timeline->favorites->count()
+            ];
+
+
+
+            $lists[] = $elm;
+
+        }
 
         return view('tweets.index', [
             'user' => $user,
-            'timelines' => $timelines
+            'timelines' => $timelines,
+            'lists' => $lists
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create()
     {
         $user = Auth()->user();
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
+        }
 
         return view('tweets.create',[
-            'user' => $user
+            'user' => $user,
+            'profile_image' => $profile_image,
+
         ]);
     }
 
@@ -116,14 +146,16 @@ class TweetsController extends Controller
     {
         $user = auth()->user();
         $tweets = $tweet->getEditTweet($user->id,$tweet->id);
-
-        if(!isset($tweets)){
-            return redirect('tweets');
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
         }
 
         return view('tweets.edit',[
             'user'=> $user,
-            'tweets' => $tweets
+            'tweets' => $tweets,
+            'profile_image' => $profile_image,
         ]);
     }
 

@@ -70,6 +70,11 @@ class UsersController extends Controller
         $follow_count = $follower->getFollowCount($user->id);
         #フォロワー数
         $follower_count = $follower->getFollowerCount($user->id);
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
+        }
 
 
         return view('users.show',[
@@ -79,7 +84,8 @@ class UsersController extends Controller
             'timelines' => $timelines,
             'tweet_count' => $tweet_count,
             'follow_count' => $follow_count,
-            'follower_count' => $follower_count
+            'follower_count' => $follower_count,
+            'profile_image' => $profile_image
         ]);
     }
 
@@ -92,9 +98,20 @@ class UsersController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
-
     {
-        return view('users.edit',['user' => $user]);
+
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
+        }
+
+        return view('users.edit',[
+            'user' => $user,
+            'profile_image' => $profile_image,
+
+
+        ]);
     }
 
     /**
