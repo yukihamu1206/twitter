@@ -1,6 +1,9 @@
 {
     "addons": [
-        "cleardb"
+        {
+            "plan": "cleardb:ignite",
+            "as": "DB"
+        }
     ],
     "buildpacks": [
         {
@@ -12,21 +15,6 @@
             "required": true
         },
         "APP_KEY": {
-            "required": true
-        },
-        "CLEARDB_DATABASE_URL": {
-            "required": true
-        },
-        "DB_DATABASE": {
-            "required": true
-        },
-        "DB_HOST": {
-            "required": true
-        },
-        "DB_PASSWORD": {
-            "required": true
-        },
-        "DB_USERNAME": {
             "required": true
         },
         "LANG": {
