@@ -1,0 +1,49 @@
+{
+    "addons": [
+        "cleardb"
+    ],
+    "buildpacks": [
+        {
+            "url": "heroku/php"
+        }
+    ],
+    "env": {
+        "APP_ENV": {
+            "required": true
+        },
+        "APP_KEY": {
+            "required": true
+        },
+        "CLEARDB_DATABASE_URL": {
+            "required": true
+        },
+        "DB_DATABASE": {
+            "required": true
+        },
+        "DB_HOST": {
+            "required": true
+        },
+        "DB_PASSWORD": {
+            "required": true
+        },
+        "DB_USERNAME": {
+            "required": true
+        },
+        "LANG": {
+            "required": true
+        },
+        "TZ": {
+            "required": true
+        }
+    },
+    "formation": {
+        "web": {
+            "quantity": 1,
+            "size": "hobby"
+        }
+    },
+    "name": "twitter-clone-qiita-review",
+    "scripts": {
+    },
+    "stack": "heroku-18"
+}
