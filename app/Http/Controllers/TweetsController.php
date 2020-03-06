@@ -27,12 +27,12 @@ class TweetsController extends Controller
         $following_ids = $follow_ids->toArray();
 
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
-        $list = [];
-        foreach($timelines as $timeline){
-            $elm =[
-                if()
-            'profile_image' => $timeline->user->profile_image,
-                '']
+//        $list = [];
+//        foreach($timelines as $timeline){
+//            $elm =[
+//                if()
+//            'profile_image' => $timeline->user->profile_image,
+//                '']
         }
 
 
