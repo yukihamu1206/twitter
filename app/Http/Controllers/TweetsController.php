@@ -27,7 +27,14 @@ class TweetsController extends Controller
         $following_ids = $follow_ids->toArray();
 
         $timelines = $tweet->getTimeLines($user->id, $following_ids);
-        Log::debug($timelines);
+        $list = [];
+        foreach($timelines as $timeline){
+            $elm =[
+                if()
+            'profile_image' => $timeline->user->profile_image,
+                '']
+        }
+
 
         return view('tweets.index', [
             'user' => $user,
@@ -80,17 +87,28 @@ class TweetsController extends Controller
 
         $user = auth()->user();
         $tweet = $tweet->getTweet($tweet->id);
+        $tweet_user = $tweet->user;
+        $tweet_text = $tweet->text;
         $comments = $comment->getComments($tweet->id);
-        $favorite = $tweet->favorites->where('user_id',$user->id)->first();
+        $favorite_count = $tweet->favorites->count();
+        $user_favorite = $tweet->favorites->where('user_id',$user->id)->first();
 
-        Log::debug($favorite);
 
+        if ($tweet->user->profile_image){
+            $profile_image = $tweet->user->profile_image;
+        }else{
+             $profile_image = 'aaa.jpg';
+        }
 
         return view('tweets.show',[
             'user'=>$user,
             'tweet'=>$tweet,
+            'tweet_user' => $tweet_user,
+            'tweet_text' => $tweet_text,
             'comments'=>$comments,
-            'favorite' => $favorite
+            'profile_image' => $profile_image,
+            'user_favorite' => $user_favorite,
+            'favorite_count' => $favorite_count,
         ]);
 
     }

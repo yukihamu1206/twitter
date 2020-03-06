@@ -10,7 +10,7 @@ class FavoritesController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
@@ -20,7 +20,7 @@ class FavoritesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create()
     {
@@ -31,7 +31,7 @@ class FavoritesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request, Favorite $favorite)
     {
@@ -41,10 +41,12 @@ class FavoritesController extends Controller
 
         if(!$is_favorite){
             $favorite->storeFavorite($user->id,$tweet_id);
-            return back();
+
+            return response()->json([
+                'result' => true
+            ]);
         }
 
-        return back();
 
     }
 
@@ -97,10 +99,12 @@ class FavoritesController extends Controller
 
         if($is_favorite){
             $favorite->destroyFavorite($favorite_id);
-            return back();
+            return response()->json([
+                'result' => true
+            ]);
         }
 
-        return back();
+
 
     }
 }
