@@ -33,7 +33,15 @@
     "addons": [
         "openredis",
         {
-            "plan": "cleardb",
+            "plan": "mongolab:shared-single-small",	            "plan": "cleardb",
+            "as": "MONGO"	
+        },	
+        {	
+            "plan": "heroku-postgresql",	
+            "options": {	
+                "version": "9.5"	
+            }
+            
         }
     ],
     "buildpacks": [
