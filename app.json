@@ -33,11 +33,22 @@
             "as": "MONGO"
         },
         {
+<<<<<<< HEAD
+=======
+            "plan": "mongolab:shared-single-small",
+            "as": "MONGO"
+        },
+        {
+>>>>>>> 42ef66f734cdcf02c8f542f711b20bfd7f9c5282
             "plan": "heroku-postgresql",
             "options": {
                 "version": "9.5"
             }
+<<<<<<< HEAD
         }	        }
+=======
+        }
+>>>>>>> 42ef66f734cdcf02c8f542f711b20bfd7f9c5282
     ],
     "buildpacks": [
         {
