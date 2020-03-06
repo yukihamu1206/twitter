@@ -1,20 +1,20 @@
 {
-    "addons": [
-        {
-            "plan": "cleardb:ignite",
-            "as": "DB"
-        }
-    ],
     "buildpacks": [
         {
             "url": "heroku/php"
         }
     ],
     "env": {
+        "APP_DEBUG": {
+            "required": true
+        },
         "APP_ENV": {
             "required": true
         },
         "APP_KEY": {
+            "required": true
+        },
+        "DATABASE_URL": {
             "required": true
         },
         "LANG": {
