@@ -101,36 +101,6 @@
                                         });
                                     });
                               </script>
-                            {{--                    --}}
-                            {{--                }--}}
-                            {{--                $.ajax--}}
-                            {{--            });--}}
-                            {{--        });--}}
-                            {{--    </script>--}}
-                            {{--@else--}}
-                            {{--    <script>--}}
-                            {{--        $(function() {--}}
-                            {{--            $(".favorite").click(function (e) {--}}
-                            {{--                $.ajax({--}}
-                            {{--                    url: "{{ url('/favorites/'. $user_favorite->id) }}",--}}
-                            {{--                    data: {--}}
-                            {{--                        _token: "{{ csrf_token() }}",--}}
-                            {{--                        tweet_id: "{{ $tweet->id }}",--}}
-                            {{--                    },--}}
-                            {{--                    type: "DELETE",--}}
-                            {{--                    success: function (data) {--}}
-                            {{--                        if(data['result'] === true){--}}
-                            {{--                            let heart = $(".fa-heart");--}}
-                            {{--                            heart.removeClass('fas');--}}
-                            {{--                            heart.addClass('far');--}}
-                            {{--                        }--}}
-
-                            {{--                    }--}}
-                            {{--                })--}}
-                            {{--            });--}}
-                            {{--        });--}}
-                            {{--    </script>--}}
-                            {{--@endif--}}
                         </div>
                     </div>
                 </div>
