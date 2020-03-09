@@ -45,66 +45,92 @@
 
 
                     <div class="d-flex align-items-center">
+                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fa-heart fa-fw {{ $user_favorite ? 'fas' : 'far' }}" id="favorite_i" data-favorite="{{optional($user_favorite)->id }}"></i></button>
 
-                        @if(!$user_favorite)
-                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
-                        @else
-                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
-                        @endif
-{{--                        いいね数--}}
-                        <p class="mb-0 text-secondary">{{ $favorite_count }}</p>
+                        <p class="mb-0 text-secondary favorite_count">{{ $favorite_count }}</p>
 
 
-                            @if(!$user_favorite)
                                 <script>
                                     $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites') }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "POST",
-                                                success: function (data) {
-                                                    if(data['result'] === true) {
-                                                        let heart = $(".fa-heart");
-                                                        heart.removeClass('far');
-                                                        heart.addClass('fas');
+                                        $(".favorite").click(function(e) {
+                                            if($(this).children('i').hasClass('far')) {
+                                                $.ajax({
+                                                        url: "{{ url('/favorites') }}",
+                                                        data: {
+                                                            _token: "{{ csrf_token() }}",
+                                                            tweet_id: "{{ $tweet->id }}",
+                                                        },
+                                                        type: "POST",
+                                                        success: function (data) {
+                                                            if (data['result'] === true) {
+                                                                let heart = $(".fa-heart");
+                                                                heart.removeClass('far');
+                                                                heart.addClass('fas');
+                                                                heart.attr('data-favorite',data['user_favorite_id']);
+                                                                $(".favorite_count").text(data['favorites_count']);
 
-                                                    }else{
-                                                        error_log('errorrrrrr');
+                                                            } else {
+                                                                error_log('errorrrrrr');
+                                                            }
+                                                         }
+                                                    });
+                                            }else {
+                                                let element = document.getElementById('favorite_i');
+                                                let favorite =  element.dataset.favorite;
+                                                $.ajax({
+                                                    url: '/favorites/' + favorite,
+                                                    data: {
+                                                        _token: "{{ csrf_token() }}",
+                                                        tweet_id: "{{ $tweet->id }}",
+                                                    },
+                                                    type: "DELETE",
+                                                    success: function (data) {
+                                                        if (data['result'] === true) {
+                                                            let heart = $(".fa-heart");
+                                                            heart.removeClass('fas');
+                                                            heart.addClass('far');
+                                                            $(".favorite_count").text(data['favorites_count']);
+                                                            $('i').data('favorite',"{{optional($user_favorite)->id}}");
+
+                                                        } else {
+                                                            error_log('errorrrrrr');
+                                                        }
                                                     }
-
-                                                }
-                                            })
+                                                });
+                                            }
                                         });
                                     });
-                                </script>
-                            @else
-                                <script>
-                                    $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites/'. $user_favorite->id) }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "DELETE",
-                                                success: function (data) {
-                                                    if(data['result'] === true){
-                                                        let heart = $(".fa-heart");
-                                                        heart.removeClass('fas');
-                                                        heart.addClass('far');
-                                                    }
+                              </script>
+                            {{--                    --}}
+                            {{--                }--}}
+                            {{--                $.ajax--}}
+                            {{--            });--}}
+                            {{--        });--}}
+                            {{--    </script>--}}
+                            {{--@else--}}
+                            {{--    <script>--}}
+                            {{--        $(function() {--}}
+                            {{--            $(".favorite").click(function (e) {--}}
+                            {{--                $.ajax({--}}
+                            {{--                    url: "{{ url('/favorites/'. $user_favorite->id) }}",--}}
+                            {{--                    data: {--}}
+                            {{--                        _token: "{{ csrf_token() }}",--}}
+                            {{--                        tweet_id: "{{ $tweet->id }}",--}}
+                            {{--                    },--}}
+                            {{--                    type: "DELETE",--}}
+                            {{--                    success: function (data) {--}}
+                            {{--                        if(data['result'] === true){--}}
+                            {{--                            let heart = $(".fa-heart");--}}
+                            {{--                            heart.removeClass('fas');--}}
+                            {{--                            heart.addClass('far');--}}
+                            {{--                        }--}}
 
-                                                }
-                                            })
-                                        });
-                                    });
-                                </script>
-                            @endif
+                            {{--                    }--}}
+                            {{--                })--}}
+                            {{--            });--}}
+                            {{--        });--}}
+                            {{--    </script>--}}
+                            {{--@endif--}}
                         </div>
                     </div>
                 </div>

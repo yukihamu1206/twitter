@@ -34,4 +34,10 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('favorites','FavoritesController',['only' => ['store','destroy']]);
 });
 
+//// ログインURL
+//Route::get('auth/twitter', 'Auth\TwitterController@redirectToProvider');
+//// コールバックURL
+//Route::get('auth/twitter/callback', 'Auth\TwitterController@handleProviderCallback');
+//// ログアウトURL
+//Route::get('auth/twitter/logout', 'Auth\TwitterController@logout');
 

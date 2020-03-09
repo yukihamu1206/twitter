@@ -117,6 +117,7 @@ class TweetsController extends Controller
         $user_favorite = $tweet->favorites->where('user_id',$user->id)->first();
 
 
+
         if ($tweet->user->profile_image){
             $profile_image = $tweet->user->profile_image;
         }else{
@@ -131,7 +132,7 @@ class TweetsController extends Controller
             'comments'=>$comments,
             'profile_image' => $profile_image,
             'user_favorite' => $user_favorite,
-            'favorite_count' => $favorite_count,
+            'favorite_count' => $favorite_count
         ]);
 
     }

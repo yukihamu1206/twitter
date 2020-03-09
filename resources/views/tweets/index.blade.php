@@ -6,7 +6,6 @@
             <div class="col-md-8 mb-3 text-right">
                 <a href="{{ url('users') }}">ユーザ一覧 <i class="fas fa-users" class="fa-fw"></i> </a>
             </div>
-                @foreach ($timelines as $timeline)
                 @foreach($lists as $list)
                         <div class="col-md-8 mb-3">
                             <div class="card">
@@ -48,73 +47,69 @@
 
 
                                     <div class="d-flex align-items-center">
-                                            @if($list['user_favorite'])
-                                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
-                                            @else
-                                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
-                                            @endif
+                                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fa-heart fa-fw {{ $list['user_favorite'] ? 'fas' : 'far' }}" id="favorite_i" data-favorite="{{ optional($list['user_favorite'])->id }}"></i></button>
 
-                                            <p class="mb-0 text-secondary">{{ $list['favorite_count'] }}</p>
+                                            <p class="mb-0 text-secondary favorite_count">{{ $list['favorite_count'] }}</p>
                                     </div>
-
-{{--                                        @if($list['user_favorite'] == null)--}}
-{{--                                            <script>--}}
-{{--                                                $(function() {--}}
-{{--                                                    $(".favorite").click(function (e) {--}}
-{{--                                                        $.ajax({--}}
-{{--                                                            url: "{{ url('/favorites') }}",--}}
-{{--                                                            data: {--}}
-{{--                                                                _token: "{{ csrf_token() }}",--}}
-{{--                                                                tweet_id: "{{ $list['tweet_id'] }}",--}}
-{{--                                                            },--}}
-{{--                                                            type: "POST",--}}
-{{--                                                            success: function (data) {--}}
-{{--                                                                if(data['result'] === true) {--}}
-{{--                                                                    let heart = $(".fa-heart");--}}
-{{--                                                                    heart.removeClass('far');--}}
-{{--                                                                    heart.addClass('fas');--}}
-
-{{--                                                                }else{--}}
-{{--                                                                    error_log('errorrrrrr');--}}
-{{--                                                                }--}}
-
-{{--                                                            }--}}
-{{--                                                        })--}}
-{{--                                                    });--}}
-{{--                                                });--}}
-{{--                                            </script>--}}
-{{--                                        @else--}}
-{{--                                            <script>--}}
-{{--                                                $(function() {--}}
-{{--                                                    $(".favorite").click(function (e) {--}}
-{{--                                                        $.ajax({--}}
-{{--                                                            url: "{{ url('/favorites/'. $list['user_favorite']->id) }}",--}}
-{{--                                                            data: {--}}
-{{--                                                                _token: "{{ csrf_token() }}",--}}
-{{--                                                                tweet_id: "{{ $list['tweet_id'] }}",--}}
-{{--                                                            },--}}
-{{--                                                            type: "DELETE",--}}
-{{--                                                            success: function (data) {--}}
-{{--                                                                if(data['result'] === true){--}}
-{{--                                                                    let heart = $(".fa-heart");--}}
-{{--                                                                    heart.removeClass('fas');--}}
-{{--                                                                    heart.addClass('far');--}}
-{{--                                                                }--}}
-
-{{--                                                            }--}}
-{{--                                                        })--}}
-{{--                                                    });--}}
-{{--                                                });--}}
-{{--                                            </script>--}}
-{{--                                        @endif--}}
-
-
 
                                 </div>
                             </div>
                         </div>
                     @endforeach
-                @endforeach
+
+
+            <script>
+                $(function() {
+                    $(".favorite").click(function (e) {
+                        if ($(this).children('i').hasClass('far')) {
+                            $.ajax({
+                                url: "{{ url('/favorites') }}",
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    tweet_id: "{{ $list['tweet_id'] }}",
+                                },
+                                type: "POST",
+                                success: function (data) {
+                                    if (data['result'] === true) {
+                                        let heart = $(".fa-heart");
+                                        heart.removeClass('far');
+                                        heart.addClass('fas');
+                                        heart.attr('data-favorite', data['user_favorite_id']);
+                                        $(".favorite_count").text(data['favorites_count']);
+
+                                    } else {
+                                        console.log('errorrrrrr');
+                                    }
+
+                                }
+                            })
+                        } else {
+                            let element = document.getElementById('favorite_i');
+                            let favorite =  element.dataset.favorite;
+                            $.ajax({
+                                url: '/favorites/'+ favorite,
+                                data: {
+                                    _token: "{{ csrf_token() }}",
+                                    tweet_id: "{{ $list['tweet_id'] }}",
+                                },
+                                type: "DELETE",
+                                success: function (data) {
+                                    if (data['result'] === true) {
+                                        let heart = $(".fa-heart");
+                                        heart.removeClass('fas');
+                                        heart.addClass('far');
+                                        $(".favorite_count").text(data['favorites_count']);
+
+                                    } else {
+                                        console.log('errorrrrrr');
+                                    }
+                                }
+                            });
+                        }
+                    });
+                });
+            </script>
+
 
         </div>
         <div class="my-4 d-flex justify-content-center">

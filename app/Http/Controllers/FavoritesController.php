@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Models\Favorite;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FavoritesController extends Controller
 {
@@ -42,8 +43,14 @@ class FavoritesController extends Controller
         if(!$is_favorite){
             $favorite->storeFavorite($user->id,$tweet_id);
 
+            $favorites_count = $favorite->where('tweet_id',$tweet_id)->count();
+            $user_favorite_id = $favorite->where('user_id',$user->id)->where('tweet_id',$tweet_id)->first()->id;
+
+            Log::debug( $user_favorite_id);
             return response()->json([
-                'result' => true
+                'result' => true,
+                'favorites_count' => $favorites_count,
+                'user_favorite_id' => $user_favorite_id
             ]);
         }
 
@@ -99,8 +106,12 @@ class FavoritesController extends Controller
 
         if($is_favorite){
             $favorite->destroyFavorite($favorite_id);
+
+            $favorites_count = $favorite->where('tweet_id',$tweet_id)->count();
+
             return response()->json([
-                'result' => true
+                'result' => true,
+                'favorites_count' => $favorites_count
             ]);
         }
 
