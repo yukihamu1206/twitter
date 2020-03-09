@@ -10,6 +10,7 @@ use App\Models\Tweet;
 use App\Models\Follower;
 use Illuminate\Support\Facades\Log;
 
+
 class UsersController extends Controller
 {
     /**
@@ -170,4 +171,5 @@ class UsersController extends Controller
         }
 
     }
+
 }

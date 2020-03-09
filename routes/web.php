@@ -34,4 +34,9 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('favorites','FavoritesController',['only' => ['store','destroy']]);
 });
 
+//twitterで認証するとこに行くやつ
+Route::get('login/twitter','Auth\LoginController@redirectTOProvider');
+//twitterから戻ってくるやつ
+Route::get('login/twitter/callback','Auth\LoginController@handleProviderCallback');
+
 
