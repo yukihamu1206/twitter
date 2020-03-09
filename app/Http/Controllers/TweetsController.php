@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Log;
-use App\Models\Tweet;
 use App\Models\Comment;
 use App\Models\Follower;
-
+use App\Models\Tweet;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 
 class TweetsController extends Controller
@@ -60,7 +58,7 @@ class TweetsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -102,9 +100,9 @@ class TweetsController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  Tweet  $tweet
+     * @param  Comment  $comment
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(Tweet $tweet, Comment $comment)
     {

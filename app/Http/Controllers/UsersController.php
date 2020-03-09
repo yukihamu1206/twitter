@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
+use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Models\User;
-use App\Models\Tweet;
-use App\Models\Follower;
-use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -92,7 +91,6 @@ class UsersController extends Controller
     }
 
 
-
     /**
      * Show the form for editing the specified resource.
      *
@@ -151,6 +149,7 @@ class UsersController extends Controller
     {
         //
     }
+
     #フォローする
     public function follow(User $user)
     {   #自分

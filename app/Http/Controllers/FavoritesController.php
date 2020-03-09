@@ -53,7 +53,7 @@ class FavoritesController extends Controller
                 ->where('tweet_id', $tweet_id)
                 ->first()->id;
 
-            Log::debug($user_favorite_id);
+
 
             return response()->json([
                 'result'           => true,

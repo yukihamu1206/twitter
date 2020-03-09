@@ -52,14 +52,14 @@
                             </div>
 
 
-                            <div class="d-flex align-items-center">
-                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i
+                            <div class="d-flex align-items-center" >
+                                <button type="button" class="btn p-0 border-0 text-danger favorite" data-tweet_id="{{ $list['tweet_id'] }}" data-favorite="{{ optional($list['user_favorite'])->id }}"><i
                                         class="fa-heart fa-fw {{ $list['user_favorite'] ? 'fas' : 'far' }}"
-                                        id="favorite_i" data-favorite="{{ optional($list['user_favorite'])->id }}"></i>
+                                        id="favorite_i"></i>
                                 </button>
 
-                                <p class="mb-0 text-secondary favorite_count">{{ $list['favorite_count'] }}</p>
-                            </div>
+                                <p class="mb-0 text-secondary favorite_count" data-tweet_id="{{ $list['tweet_id'] }}">{{ $list['favorite_count'] }}</p>
+                        </div>
 
                         </div>
                     </div>
@@ -70,32 +70,32 @@
             <script>
                 $( function () {
                     $( ".favorite" ).click( function ( e ) {
+                        let button = $(this);
+                        let favorite_count = button.parent().find('p');
                         if ( $( this ).children( 'i' ).hasClass( 'far' ) ) {
+                             let tweet_id = $(this).data('tweet_id');
                             $.ajax( {
                                 url: "{{ url('/favorites') }}",
                                 data: {
                                     _token: "{{ csrf_token() }}",
                                     // TODO: 正しい tweet_id が取れていない ⇨ いいねボタンのDOMにツイートのIDも持たせておく
-                                    tweet_id: "{{ $list['tweet_id'] }}",
+                                    tweet_id: tweet_id,
                                 },
                                 type: "POST",
                                 success: function ( data ) {
                                     if ( data['result'] === true ) {
-                                        let heart = $( ".fa-heart" );
-                                        heart.removeClass( 'far' );
-                                        heart.addClass( 'fas' );
-                                        heart.attr( 'data-favorite', data['user_favorite_id'] );
-                                        $( ".favorite_count" ).text( data['favorites_count'] );
+                                        button.children('i').removeClass( 'far' );
+                                        button.children('i').addClass( 'fas' );
+                                        button.children('i').attr( 'data-favorite', data['user_favorite_id'] );
+                                        favorite_count.text( data['favorites_count'] );
 
                                     } else {
                                         console.log( 'errorrrrrr' );
                                     }
-
                                 }
                             } )
                         } else {
-                            let element = document.getElementById( 'favorite_i' );
-                            let favorite = element.dataset.favorite;
+                            let favorite = $(this).data('favorite');
                             $.ajax( {
                                 url: '/favorites/' + favorite,
                                 data: {
