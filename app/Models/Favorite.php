@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Favorite extends Model
 {
-    public $timestamps = false;
+    public $timestamps = true;
 
     #いいねしているかどうかの判定処理
     public function isFavorite(Int $user_id, Int $tweet_id)
