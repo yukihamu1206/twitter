@@ -45,7 +45,7 @@
 
 
                     <div class="d-flex align-items-center">
-                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fa-heart fa-fw {{ $user_favorite ? 'fas' : 'far' }}" id="favorite_i" data-favorite="{{optional($user_favorite)->id }}"></i></button>
+                            <button type="button" class="btn p-0 border-0 text-danger favorite" id="favorite" data-favorite="{{optional($user_favorite)->id }}"><i class="fa-heart fa-fw {{ $user_favorite ? 'fas' : 'far' }}" id="favorite_i"></i></button>
 
                         <p class="mb-0 text-secondary favorite_count">{{ $favorite_count }}</p>
 
@@ -66,7 +66,7 @@
                                                                 let heart = $(".fa-heart");
                                                                 heart.removeClass('far');
                                                                 heart.addClass('fas');
-                                                                heart.attr('data-favorite',data['user_favorite_id']);
+                                                                $('#favorite').attr('data-favorite',data['user_favorite_id']);
                                                                 $(".favorite_count").text(data['favorites_count']);
 
                                                             } else {
@@ -75,7 +75,7 @@
                                                          }
                                                     });
                                             }else {
-                                                let element = document.getElementById('favorite_i');
+                                                let element = document.getElementById('favorite');
                                                 let favorite =  element.dataset.favorite;
                                                 $.ajax({
                                                     url: '/favorites/' + favorite,

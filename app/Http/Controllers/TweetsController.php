@@ -35,7 +35,6 @@ class TweetsController extends Controller
                 'created_at' => $timeline->created_at->format('Y-m-d H:i'),
                 'profile_image' => $timeline->user->profime_image != null ? $timeline->user->profile_image : 'aaa.jpg',
                 'tweet_id' =>$timeline->id,
-                'user' => $timeline->user,
                 'user_id' => $timeline->user->id,
                 'user_name' => $timeline->user->name,
                 'screen_name' => $timeline->user->screen_name,
@@ -105,7 +104,7 @@ class TweetsController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function show(Tweet $tweet, Comment $comment)
     {
@@ -144,7 +143,7 @@ class TweetsController extends Controller
      *
      * @param  int
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function edit(Tweet $tweet)
     {
