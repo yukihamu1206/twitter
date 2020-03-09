@@ -77,6 +77,7 @@
                                             }else {
                                                 let element = document.getElementById('favorite');
                                                 let favorite =  element.dataset.favorite;
+                                                console.log(favorite);
                                                 $.ajax({
                                                     url: '/favorites/' + favorite,
                                                     data: {

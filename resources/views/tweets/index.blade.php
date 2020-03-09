@@ -86,30 +86,30 @@
                                     if ( data['result'] === true ) {
                                         button.children('i').removeClass( 'far' );
                                         button.children('i').addClass( 'fas' );
-                                        button.children('i').attr( 'data-favorite', data['user_favorite_id'] );
+                                        button.attr( 'data-favorite', data['user_favorite_id'] );
                                         favorite_count.text( data['favorites_count'] );
 
                                     } else {
                                         console.log( 'errorrrrrr' );
                                     }
                                 }
-                            } )
+                            })
                         } else {
-                            let favorite = $(this).data('favorite');
+                             let favorite = button.data('favorite');
+                            let tweet_id =  button.data('tweet_id');
                             $.ajax( {
                                 url: '/favorites/' + favorite,
                                 data: {
                                     _token: "{{ csrf_token() }}",
-                                    tweet_id: "{{ $list['tweet_id'] }}",
+                                    tweet_id: tweet_id,
                                 },
                                 type: "DELETE",
                                 success: function ( data ) {
                                     if ( data['result'] === true ) {
-                                        let heart = $( ".fa-heart" );
-                                        heart.removeClass( 'fas' );
-                                        heart.addClass( 'far' );
-                                        $( ".favorite_count" ).text( data['favorites_count'] );
-
+                                        button.children('i').removeClass( 'fas' );
+                                        button.children('i').addClass( 'far' );
+                                        button.attr( 'data-favorite', "" );
+                                        favorite_count.text( data['favorites_count'] );
                                     } else {
                                         console.log( 'errorrrrrr' );
                                     }
