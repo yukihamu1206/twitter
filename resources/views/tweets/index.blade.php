@@ -86,7 +86,10 @@
                                     if ( data['result'] === true ) {
                                         button.children('i').removeClass( 'far' );
                                         button.children('i').addClass( 'fas' );
+                                        // attrにする場合は取得も設定もattr
                                         button.attr( 'data-favorite', data['user_favorite_id'] );
+                                        // これはdata-favoriteに設定してる
+                                        // button.data( 'favorite', data['user_favorite_id'] );
                                         favorite_count.text( data['favorites_count'] );
 
                                     } else {
@@ -95,7 +98,10 @@
                                 }
                             })
                         } else {
-                             let favorite = button.data('favorite');
+                            // 取り出す時もattr
+                            let favorite = button.attr('data-favorite');
+                            // attrで設定してこれでとると取れない
+                             // let favorite = button.data('favorite');
                             let tweet_id =  button.data('tweet_id');
                             $.ajax( {
                                 url: '/favorites/' + favorite,

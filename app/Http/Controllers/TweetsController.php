@@ -14,7 +14,7 @@ class TweetsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index(Tweet $tweet, Follower $follower)
     {
@@ -141,7 +141,7 @@ class TweetsController extends Controller
      *
      * @param  int
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(Tweet $tweet)
     {
@@ -166,7 +166,7 @@ class TweetsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, Tweet $tweet)
     {
@@ -178,7 +178,7 @@ class TweetsController extends Controller
         $validator->validate();
         $tweet->tweetupdate($tweet->id, $data);
 
-        return redirect('tweets');
+        return redirect('users/'.$tweet->user->id );
 
 
     }
@@ -188,7 +188,7 @@ class TweetsController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Tweet $tweet)
     {

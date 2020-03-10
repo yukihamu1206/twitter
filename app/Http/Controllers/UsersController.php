@@ -6,6 +6,7 @@ use App\Models\Follower;
 use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
@@ -52,11 +53,10 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
-
         #今ログインしているuser
         $login_user = auth()->user();
         #フォローしているユーザー
@@ -77,6 +77,28 @@ class UsersController extends Controller
             $profile_image = 'aaa.jpg';
         }
 
+        $lists = [];
+
+        foreach($timelines as $timeline){
+            $elm = [
+                'profile_image' =>  $timeline->user->profile_image   ? $timeline->user->profile_image : 'aaa.jpg',
+                'user_name' => $timeline->user->name,
+                'screen_name' => $timeline->user->screen_name,
+                'tweet_text' => $timeline->text,
+                'tweet_id' =>$timeline->id,
+                'created_at' => $timeline->created_at->format('Y-m-d H:i'),
+                'user_id' => $timeline->user->id,
+                'comment_count' => $timeline->comments->count(),
+                'favorite' => $timeline->favorites,
+                'favorite_count' => $timeline->favorites->count(),
+                'user_favorite' => $timeline->favorites->where('user_id',auth()->user()->id)->first(),
+            ];
+
+            $lists[] = $elm;
+
+
+        }
+
 
         return view('users.show',[
             'user' => $user,
@@ -86,7 +108,9 @@ class UsersController extends Controller
             'tweet_count' => $tweet_count,
             'follow_count' => $follow_count,
             'follower_count' => $follower_count,
-            'profile_image' => $profile_image
+            'profile_image' => $profile_image,
+            'lists' => $lists,
+            'login_user' => $login_user
         ]);
     }
 
@@ -96,7 +120,7 @@ class UsersController extends Controller
      *
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
     {
@@ -121,7 +145,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request,User $user)
     {
