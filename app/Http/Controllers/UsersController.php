@@ -7,8 +7,10 @@ use App\Models\Tweet;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
 
 class UsersController extends Controller
 {
@@ -153,11 +155,24 @@ class UsersController extends Controller
         $validator = Validator::make($data, [
             'screen_name' => ['required', 'string', 'max:50',Rule::unique('users')->ignore($user->id)],
             'name' =>['required','string','max:225'],
-            'profile_image' => ['file','image','mimes:jpeg,png,jpg','max:2048'],
             'email' => ['required','string','email','max:225',Rule::unique('users')->ignore($user->id)]
         ]);
         $validator->validate();
+        $profile_image = $data['profile_image']->file('profile_image');
+        $profile_image_name = $data['profile_image']->file('profile_image')->getClientOriginalName();
+
+        if ($profile_image->isValid()) {
+
+            dd($profile_image_name);
+
+        }
+
+        $path = Storage::disk('s3')->putFileAs('/',$profile_image,$user->id,'public');
+        Log::debug($profile_image);
+
         $user->updateProfile($data);
+
+
         return redirect('users/'.$user->id);
     }
 
