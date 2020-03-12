@@ -14,7 +14,6 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
 });
 
 Route::resource('tweets','TweetsController',['ouly' => ['index','create','store','show','edit','update','destroy']]);
