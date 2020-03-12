@@ -12,9 +12,6 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Auth::routes();
 
@@ -22,6 +19,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 #user関連
 Route::group(['middleware' => 'auth'],function(){
+    Route::get('/','TweetsController@index');
     Route::resource('users','UsersController',['only' => ['index','show','edit','update']]);
     #tweet関連
     Route::resource('tweets','TweetsController',['ouly' => ['index','create','store','show','edit','update','destroy']]);
@@ -34,4 +32,10 @@ Route::group(['middleware' => 'auth'],function(){
     Route::resource('favorites','FavoritesController',['only' => ['store','destroy']]);
 });
 
+//// ログインURL
+//Route::get('auth/twitter', 'Auth\TwitterController@redirectToProvider');
+//// コールバックURL
+//Route::get('auth/twitter/callback', 'Auth\TwitterController@handleProviderCallback');
+//// ログアウトURL
+//Route::get('auth/twitter/logout', 'Auth\TwitterController@logout');
 

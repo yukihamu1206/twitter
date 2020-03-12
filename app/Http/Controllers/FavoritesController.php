@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Favorite;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class FavoritesController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function index()
     {
@@ -20,7 +23,7 @@ class FavoritesController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function create()
     {
@@ -31,20 +34,34 @@ class FavoritesController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Favorite  $favorite
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request, Favorite $favorite)
     {
-        $user = auth()->user();
-        $tweet_id = $request->tweet_id;
-        $is_favorite = $favorite->isFavorite($user->id,$tweet_id);
+        $user        = auth()->user();
+        $tweet_id    = $request->tweet_id;
+        $is_favorite = $favorite->isFavorite($user->id, $tweet_id);
 
-        if(!$is_favorite){
-            $favorite->storeFavorite($user->id,$tweet_id);
-            return back();
+        if ( ! $is_favorite) {
+            $favorite->storeFavorite($user->id, $tweet_id);
+
+            $favorites_count  = $favorite->where('tweet_id', $tweet_id)
+                ->count();
+            $user_favorite_id = $favorite->where('user_id', $user->id)
+                ->where('tweet_id', $tweet_id)
+                ->first()->id;
+
+
+
+            return response()->json([
+                'result'           => true,
+                'favorites_count'  => $favorites_count,
+                'user_favorite_id' => $user_favorite_id,
+            ]);
         }
 
-        return back();
 
     }
 
@@ -52,6 +69,7 @@ class FavoritesController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,6 +81,7 @@ class FavoritesController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -75,6 +94,7 @@ class FavoritesController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -85,22 +105,28 @@ class FavoritesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  \App\Models\Favorite  $favorite
+     *
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Favorite $favorite)
     {
-        $user_id = $favorite->user_id;
-        $tweet_id = $favorite->tweet_id;
+        $user_id     = $favorite->user_id;
+        $tweet_id    = $favorite->tweet_id;
         $favorite_id = $favorite->id;
-        $is_favorite = $favorite->isFavorite($user_id,$tweet_id);
+        $is_favorite = $favorite->isFavorite($user_id, $tweet_id);
 
-        if($is_favorite){
+        if ($is_favorite) {
             $favorite->destroyFavorite($favorite_id);
-            return back();
+
+            $favorites_count = $favorite->where('tweet_id', $tweet_id)->count();
+
+            return response()->json([
+                'result'          => true,
+                'favorites_count' => $favorites_count,
+            ]);
         }
 
-        return back();
 
     }
 }

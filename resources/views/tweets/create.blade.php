@@ -12,11 +12,8 @@
                             @csrf
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 p-3 w-100 d-flex">
-                                    @if($user->profile_image == null)
-                                        <img src="{{ asset('storage/profile_image/aaa.jpg') }}" class="rounded-circle" width="50" height="50">
-                                    @else
-                                        <img src="{{ asset('storage/profile_image/'.$user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                                    @endif
+                                    <img src="{{ asset('storage/profile_image/'.$profile_image) }}" class="rounded-circle" width="50" height="50">
+
                                     <div class="ml-2 d-flex flex-column">
                                         <p class="mb-0">{{ $user->name }}</p>
                                         <a href="{{ url('users/'.$user->id ) }}" class="text-secondary">{{ $user->screen_name }}</a>
@@ -45,7 +42,7 @@
             </div>
         </div>
     </div>
-    @endsection
+@endsection
 
 
 

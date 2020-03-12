@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Follower;
+use App\Models\Tweet;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
-use App\Models\User;
-use App\Models\Tweet;
-use App\Models\Follower;
-use Illuminate\Support\Facades\Log;
 
 class UsersController extends Controller
 {
@@ -40,6 +40,7 @@ class UsersController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -51,11 +52,11 @@ class UsersController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function show(User $user, Tweet $tweet, Follower $follower)
     {
-
         #今ログインしているuser
         $login_user = auth()->user();
         #フォローしているユーザー
@@ -70,6 +71,33 @@ class UsersController extends Controller
         $follow_count = $follower->getFollowCount($user->id);
         #フォロワー数
         $follower_count = $follower->getFollowerCount($user->id);
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
+        }
+
+        $lists = [];
+
+        foreach($timelines as $timeline){
+            $elm = [
+                'profile_image' =>  $timeline->user->profile_image   ? $timeline->user->profile_image : 'aaa.jpg',
+                'user_name' => $timeline->user->name,
+                'screen_name' => $timeline->user->screen_name,
+                'tweet_text' => $timeline->text,
+                'tweet_id' =>$timeline->id,
+                'created_at' => $timeline->created_at->format('Y-m-d H:i'),
+                'user_id' => $timeline->user->id,
+                'comment_count' => $timeline->comments->count(),
+                'favorite' => $timeline->favorites,
+                'favorite_count' => $timeline->favorites->count(),
+                'user_favorite' => $timeline->favorites->where('user_id',auth()->user()->id)->first(),
+            ];
+
+            $lists[] = $elm;
+
+
+        }
 
 
         return view('users.show',[
@@ -79,22 +107,36 @@ class UsersController extends Controller
             'timelines' => $timelines,
             'tweet_count' => $tweet_count,
             'follow_count' => $follow_count,
-            'follower_count' => $follower_count
+            'follower_count' => $follower_count,
+            'profile_image' => $profile_image,
+            'lists' => $lists,
+            'login_user' => $login_user
         ]);
     }
-
 
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function edit(User $user)
-
     {
-        return view('users.edit',['user' => $user]);
+
+        if($user->profile_image){
+            $profile_image = $user->profile_image;
+        }else{
+            $profile_image = 'aaa.jpg';
+        }
+
+        return view('users.edit',[
+            'user' => $user,
+            'profile_image' => $profile_image,
+
+
+        ]);
     }
 
     /**
@@ -102,7 +144,8 @@ class UsersController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function update(Request $request,User $user)
     {
@@ -123,12 +166,14 @@ class UsersController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         //
     }
+
     #フォローする
     public function follow(User $user)
     {   #自分

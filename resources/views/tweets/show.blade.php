@@ -7,24 +7,20 @@
             <div class="col-md-8 mb-3">
                 <div class="card">
                     <div class="card-haeder p-3 w-100 d-flex">
-                        @if($tweet->user->profile_image)
-                            <img src="{{  asset('storage/profile_image/'.$tweet->user->profile_image) }}" class="rounded-circle" width="50" height="50">
-                        @else
-                            <img src="{{  asset('storage/profile_image/aaa.jpg') }}" class="rounded-circle" width="50" height="50">
-                        @endif
+                            <img src="{{  asset('storage/profile_image/'.$profile_image) }}" class="rounded-circle" width="50" height="50">
                         <div class="ml-2 d-flex flex-column">
-                            <p class="mb-0">{{ $tweet->user->name }}</p>
-                            <a href="{{ url('users/' .$tweet->user->id) }}" class="text-secondary">{{ $tweet->user->screen_name }}</a>
+                            <p class="mb-0">{{ $tweet_user->name }}</p>
+                            <a href="{{ url('users/' .$tweet_user->id) }}" class="text-secondary">{{ $tweet_user->screen_name }}</a>
                         </div>
                         <div class="d-flex justify-content-end flex-grow-1">
                             <p class="mb-0 text-secondary">{{ $tweet->created_at->format('Y-m-d H:i') }}</p>
                         </div>
                     </div>
                     <div class="card-body">
-                        {!! nl2br(e($tweet->text)) !!}
+                        {!! nl2br(e($tweet_text)) !!}
                     </div>
                     <div class="card-footer py-1 d-flex justify-content-end bg-white">
-                        @if ($tweet->user->id === Auth::user()->id)
+                        @if ($tweet_user === Auth::user())
                             <div class="dropdown mr-3 d-flex align-items-center">
                                 <a href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-ellipsis-v fa-fw"></i>
@@ -49,71 +45,64 @@
 
 
                     <div class="d-flex align-items-center">
-{{--                        tweetにいいねがあった場合--}}
-                        @if($tweet->favorites !== null)
-{{--                            自分はまだいいねしていない--}}
-                            @if (!in_array($user->id, array_column($tweet->favorites->toArray(), 'user_id'), TRUE))
-                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
+                            <button type="button" class="btn p-0 border-0 text-danger favorite" id="favorite" data-favorite="{{optional($user_favorite)->id }}"><i class="fa-heart fa-fw {{ $user_favorite ? 'fas' : 'far' }}" id="favorite_i"></i></button>
 
-                            @else
-{{--                                いいねしている--}}
-                                <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="fas fa-heart fa-fw"></i></button>
+                        <p class="mb-0 text-secondary favorite_count">{{ $favorite_count }}</p>
 
-                            @endif
-{{--                            tweetにいいねがない--}}
-                        @else
-                            <button type="button" class="btn p-0 border-0 text-danger favorite"><i class="far fa-heart fa-fw"></i></button>
-                        @endif
-{{--                        いいね数--}}
-                        @if($tweet->favorites ==null)
-{{--                        もしいいねがなかったら0を表示--}}
-                            <p class="mb-0 text-secondary">0</p>
-                        @else
-{{--                            いいねがあったらいいね数表示--}}
-                            <p class="mb-0 text-secondary">{{ count($tweet->favorites->toArray()) }}</p>
-                        @endif
-                    </div>
 
-                            @if($favorite==null)
                                 <script>
                                     $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites') }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "POST",
-                                                success: function (data) {
-                                                    $(this).children('i').addClass('fas');
+                                        $(".favorite").click(function(e) {
+                                            if($(this).children('i').hasClass('far')) {
+                                                $.ajax({
+                                                        url: "{{ url('/favorites') }}",
+                                                        data: {
+                                                            _token: "{{ csrf_token() }}",
+                                                            tweet_id: "{{ $tweet->id }}",
+                                                        },
+                                                        type: "POST",
+                                                        success: function (data) {
+                                                            if (data['result'] === true) {
+                                                                let heart = $(".fa-heart");
+                                                                heart.removeClass('far');
+                                                                heart.addClass('fas');
+                                                                $('#favorite').attr('data-favorite',data['user_favorite_id']);
+                                                                $(".favorite_count").text(data['favorites_count']);
 
-                                                }
-                                            })
+                                                            } else {
+                                                                error_log('errorrrrrr');
+                                                            }
+                                                         }
+                                                    });
+                                            }else {
+                                                let element = document.getElementById('favorite');
+                                                let favorite =  element.dataset.favorite;
+                                                console.log(favorite);
+                                                $.ajax({
+                                                    url: '/favorites/' + favorite,
+                                                    data: {
+                                                        _token: "{{ csrf_token() }}",
+                                                        tweet_id: "{{ $tweet->id }}",
+                                                    },
+                                                    type: "DELETE",
+                                                    success: function (data) {
+                                                        if (data['result'] === true) {
+                                                            let heart = $(".fa-heart");
+                                                            heart.removeClass('fas');
+                                                            heart.addClass('far');
+                                                            $(".favorite_count").text(data['favorites_count']);
+                                                            $('i').data('favorite',"{{optional($user_favorite)->id}}");
+
+                                                        } else {
+                                                            error_log('errorrrrrr');
+                                                        }
+                                                    }
+                                                });
+                                            }
                                         });
                                     });
-                                </script>
-                            @else
-                                <script>
-                                    $(function() {
-                                        $(".favorite").click(function (e) {
-                                            $.ajax({
-                                                url: "{{ url('/favorites/'.$favorite->id) }}",
-                                                data: {
-                                                    _token: "{{ csrf_token() }}",
-                                                    tweet_id: "{{ $tweet->id }}",
-                                                },
-                                                type: "DELETE",
-                                                success: function (data) {
-                                                    $(this).children('i').addClass('far');
-
-                                                }
-                                            })
-                                        });
-                                    });
-                                </script>
-                            @endif
-                    </div>
+                              </script>
+                        </div>
                     </div>
                 </div>
             </div>

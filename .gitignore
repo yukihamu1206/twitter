@@ -16,3 +16,6 @@ yarn-error.log
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
+
+
+/storage/debugbar
