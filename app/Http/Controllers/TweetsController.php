@@ -18,22 +18,7 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        $method = 'GET';
-        $url = 'http://localhost/api/tweets';
-
-        $client = new Client();
-
-        $response = $client->request($method, $url, ['verify' => false]);
-
-        $tweets = $response->getBody();
-        $tweets = json_decode($tweets,true);
-
-
-
-        Log::debug($tweets);
-
         return view('tweets.index');
-
     }
 
     /**

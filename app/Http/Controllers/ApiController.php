@@ -29,7 +29,7 @@ class ApiController extends Controller
 
 
         return response()->json(
-            ['data' => $lists],
+            ['lists' => $lists],
             200,[],
             JSON_UNESCAPED_UNICODE);
 
