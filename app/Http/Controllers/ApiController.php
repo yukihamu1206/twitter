@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Tweet;
 use Illuminate\Http\Request;
+use \GuzzleHttp\Client;
 
 class ApiController extends Controller
 {
 
     public function tweets(){
+
+
 
         $tweets = Tweet::all();
 
@@ -25,10 +28,21 @@ class ApiController extends Controller
             $lists[] = $elm;
         }
 
+
         return response()->json(
             ['data' => $lists],
             200,[],
             JSON_UNESCAPED_UNICODE);
+
+
+//        $token = Auth()->user()->api_token;
+//        $method = 'GET';
+//        $url = 'http://localhost/api/tweet/?api_token='.$token;
+//
+//        $client = new Client();
+//
+//        $responce = $client->request($method, $url);
+
     }
 
     public function tweet_post(){
