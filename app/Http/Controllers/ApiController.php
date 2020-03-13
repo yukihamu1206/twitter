@@ -42,8 +42,6 @@ class ApiController extends Controller
         $tweet->text = $request->text;
         $tweet->user_id = Auth()->user()->id;
 
-        Log::debug($tweet);
-
         $tweet->save();
 
         return response()->json(
@@ -57,7 +55,7 @@ class ApiController extends Controller
          $tweet = Tweet::find($id);
 
         return response()->json(
-            ['data' => $tweet],
+            ['tweet' => $tweet],
             200,[],
             JSON_UNESCAPED_UNICODE);
 

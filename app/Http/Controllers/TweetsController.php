@@ -51,11 +51,7 @@ class TweetsController extends Controller
      */
     public function show($id)
     {
-        $tweet = Tweet::find($id);
-        return response()->json(
-            ['data' => $tweet],
-            200,[],
-            JSON_UNESCAPED_UNICODE);
+        return view('tweets.show');
     }
 
     /**
