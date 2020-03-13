@@ -13,6 +13,10 @@ class Tweet extends Model
         'text'
     ];
 
+    public static function create(array $array)
+    {
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Comment;
-use App\Models\Follower;
+use App\Http\Resources\TweetResource;
 use App\Models\Tweet;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 
 class TweetsController extends Controller
@@ -16,148 +16,53 @@ class TweetsController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index(Tweet $tweet, Follower $follower)
+    public function index()
     {
-        $user = auth()->user();
-        //フォローしている　userのIDを持ってくる
-        $follow_ids = $follower->followingIds($user->id);
-
-        $following_ids = $follow_ids->toArray();
-
-        $timelines = $tweet->getTimeLines($user->id, $following_ids);
-
-        $lists = [];
-        foreach($timelines as $timeline){
-            $elm = [
-                'tweet_text' => $timeline->text,
-                'created_at' => $timeline->created_at->format('Y-m-d H:i'),
-                'profile_image' => $timeline->user->profime_image != null ? $timeline->user->profile_image : 'aaa.jpg',
-                'tweet_id' =>$timeline->id,
-                'user_id' => $timeline->user->id,
-                'user_name' => $timeline->user->name,
-                'screen_name' => $timeline->user->screen_name,
-                'comment_count' => $timeline->comments->count(),
-                'favorite' => $timeline->favorites,
-                'user_favorite' => $timeline->favorites->where('user_id',auth()->user()->id)->first(),
-                'favorite_count' => $timeline->favorites->count()
-            ];
-
-
-
-            $lists[] = $elm;
-
-        }
-
-        return view('tweets.index', [
-            'user' => $user,
-            'timelines' => $timelines,
-            'lists' => $lists
-        ]);
+        return view('tweets.index');
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        $user = Auth()->user();
-        if($user->profile_image){
-            $profile_image = $user->profile_image;
-        }else{
-            $profile_image = 'aaa.jpg';
-        }
+        return view('tweets.create');
 
-        return view('tweets.create',[
-            'user' => $user,
-            'profile_image' => $profile_image,
-
-        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     *
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Tweet $tweet)
+    public function store(Request $request)
     {
-        $user = auth()->user();
-        $data = $request->all();
-        $validator = Validator::make($data,[
-            'text' => ['required','string', 'max:140']
-        ]);
-
-        $validator->validate();
-        $tweet->tweetStore($user->id,$data);
-
-        return redirect('tweets');
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  Tweet  $tweet
-     * @param  Comment  $comment
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  int  $id
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Tweet $tweet, Comment $comment)
+    public function show($id)
     {
-
-        $user = auth()->user();
-        $tweet = $tweet->getTweet($tweet->id);
-        $tweet_user = $tweet->user;
-        $tweet_text = $tweet->text;
-        $comments = $comment->getComments($tweet->id);
-        $favorite_count = $tweet->favorites->count();
-        $user_favorite = $tweet->favorites->where('user_id',$user->id)->first();
-
-
-
-        if ($tweet->user->profile_image){
-            $profile_image = $tweet->user->profile_image;
-        }else{
-             $profile_image = 'aaa.jpg';
-        }
-
-        return view('tweets.show',[
-            'user'=>$user,
-            'tweet'=>$tweet,
-            'tweet_user' => $tweet_user,
-            'tweet_text' => $tweet_text,
-            'comments'=>$comments,
-            'profile_image' => $profile_image,
-            'user_favorite' => $user_favorite,
-            'favorite_count' => $favorite_count
-        ]);
-
+        return view('tweets.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
      */
-    public function edit(Tweet $tweet)
+    public function edit($id)
     {
-        $user = auth()->user();
-        $tweets = $tweet->getEditTweet($user->id,$tweet->id);
-        if($user->profile_image){
-            $profile_image = $user->profile_image;
-        }else{
-            $profile_image = 'aaa.jpg';
-        }
-
-        return view('tweets.edit',[
-            'user'=> $user,
-            'tweets' => $tweets,
-            'profile_image' => $profile_image,
-        ]);
+        return view('tweets.edit');
     }
 
     /**
@@ -165,36 +70,21 @@ class TweetsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tweet $tweet)
+    public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $validator = Validator::make($data,[
-            'text' => ['required', 'string', 'max:140']
-        ]);
-
-        $validator->validate();
-        $tweet->tweetupdate($tweet->id, $data);
-
-        return redirect('users/'.$tweet->user->id );
-
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Illuminate\Http\Response
      */
-    public function destroy(Tweet $tweet)
+    public function destroy($id)
     {
-        $user = auth()->user();
-        $tweet->tweetDestroy($user->id,$tweet->id);
-
-        return back();
+        //
     }
 }

@@ -19,6 +19,7 @@
                                         <img src="{{ asset('storage/profile_image/'.$profile_image) }}" class="mr-2 rounded-circle" width="80" height="80" alt="profile_image">
                                     <input type="file" name="profile_image" class="@error('profile_image') is-invalid @enderror" autocomplete="profile_image">
 
+
                                     @error('profile_image')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
