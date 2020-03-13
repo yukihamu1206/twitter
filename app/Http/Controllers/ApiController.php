@@ -47,7 +47,7 @@ class ApiController extends Controller
         $tweet->save();
 
         return response()->json(
-            ['tweet' => $tweet],
+            ['tweet' => $tweet->text,
             200, [],
             JSON_UNESCAPED_UNICODE);
     }
