@@ -16,7 +16,6 @@ class TweetsController extends Controller
      */
     public function index()
     {
-        return TweetResource::collection(Tweet::all());
 
     }
 

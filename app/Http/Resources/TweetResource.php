@@ -23,4 +23,9 @@ class TweetResource extends JsonResource
             'favorite_count' => FavoriteResource::collection($this->favorites)
             ];
     }
+
+    public function tweet_post()
+    {
+
+    }
 }

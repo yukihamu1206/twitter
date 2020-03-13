@@ -13,6 +13,12 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    Route::resource('tweets','TweetsController',['ouly' => ['index','create','store','show','edit','update','destroy']]);
-});
+//Route::middleware('auth:api'){
+//
+//});
+// Route::resource('/tweets','TweetsController',['only' => ['index','create','store','show','edit','update','destroy']])->middleware('auth:api');
+
+Route::get('/tweets','ApiController@tweets')->middleware('auth:api');
+Route::post('/tweet','ApiController@tweet_post')->middleware('auth:api');
+Route::get('/tweets/{tweet}','ApiController@tweet_get')->middleware('auth:api');
+
