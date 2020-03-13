@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tweet;
 use Illuminate\Http\Request;
 use \GuzzleHttp\Client;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -35,16 +36,18 @@ class ApiController extends Controller
 
     }
 
-    public function tweet_post(){
+    public function tweet_post(Request $request){
 
         $tweet = new Tweet;
-        $tweet->text = 'おほほほ';
+        $tweet->text = $request->text;
         $tweet->user_id = Auth()->user()->id;
+
+        Log::debug($tweet);
 
         $tweet->save();
 
         return response()->json(
-            ['data' => $tweet],
+            ['tweet' => $tweet],
             200,[],
             JSON_UNESCAPED_UNICODE);
     }
