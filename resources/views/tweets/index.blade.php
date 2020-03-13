@@ -1,6 +1,24 @@
-{{--@extends('layouts.app')--}}
+@extends('layouts.app')
 
-{{--@section('content')--}}
+@section('content')
+{{--    <script>--}}
+{{--        function getAPI(){--}}
+{{--            var url = 'http://localhost/api/tweets';--}}
+
+{{--            var p = {--}}
+{{--                type:'get',--}}
+{{--                url: url,--}}
+{{--            };--}}
+
+{{--            $ajax(p).done(function(returnData){--}}
+{{--                console.log(returnData);--}}
+{{--            })--}}
+{{--        }--}}
+{{--    </script>--}}
+
+
+
+
 {{--    <div class="container">--}}
 {{--        <div class="row justify-content-center">--}}
 {{--            <div class="col-md-8 mb-3 text-right">--}}
@@ -132,4 +150,4 @@
 {{--            {{ $timelines->links() }}--}}
 {{--        </div>--}}
 {{--    </div>--}}
-{{--@endsection--}}
+@endsection

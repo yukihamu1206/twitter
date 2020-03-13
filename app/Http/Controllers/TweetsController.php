@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\TweetResource;
 use App\Models\Tweet;
+use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 
 class TweetsController extends Controller
@@ -12,10 +14,25 @@ class TweetsController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
+        $method = 'GET';
+        $url = 'http://localhost/api/tweets';
+
+        $client = new Client();
+
+        $response = $client->request($method, $url, ['verify' => false]);
+
+        $tweets = $response->getBody();
+        $tweets = json_decode($tweets,true);
+
+
+
+        Log::debug($tweets);
+
+        return view('tweets.index');
 
     }
 

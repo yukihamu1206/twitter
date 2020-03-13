@@ -12,7 +12,6 @@ class ApiController extends Controller
     public function tweets(){
 
 
-
         $tweets = Tweet::all();
 
         $lists = [];
@@ -33,15 +32,6 @@ class ApiController extends Controller
             ['data' => $lists],
             200,[],
             JSON_UNESCAPED_UNICODE);
-
-
-//        $token = Auth()->user()->api_token;
-//        $method = 'GET';
-//        $url = 'http://localhost/api/tweet/?api_token='.$token;
-//
-//        $client = new Client();
-//
-//        $responce = $client->request($method, $url);
 
     }
 
