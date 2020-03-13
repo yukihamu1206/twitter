@@ -6,6 +6,7 @@ use App\Models\Tweet;
 use Illuminate\Http\Request;
 use \GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -36,7 +37,8 @@ class ApiController extends Controller
 
     }
 
-    public function tweet_post(Request $request){
+    public function tweet_post(Request $request)
+    {
 
         $tweet = new Tweet;
         $tweet->text = $request->text;
@@ -46,18 +48,41 @@ class ApiController extends Controller
 
         return response()->json(
             ['tweet' => $tweet],
-            200,[],
+            200, [],
             JSON_UNESCAPED_UNICODE);
     }
 
-    public function tweet_get(Request $request, $id){
+    public function tweet_get(Request $request, $id)
+    {
 
-         $tweet = Tweet::find($id);
+        $tweet = Tweet::find($id);
 
         return response()->json(
-            ['tweet' => $tweet],
-            200,[],
+            ['tweet' => $tweet->text],
+            200, [],
             JSON_UNESCAPED_UNICODE);
 
     }
+
+    public function tweet_update(Request $request, Tweet $tweet)
+    {
+
+        $data = $request->all();
+
+        $validator = Validator::make($data, [
+            'text' => ['required', 'string', 'max:140']
+        ]);
+
+        $validator->validate();
+        $tweet->tweetUpdate($tweet->id, $data);
+
+        Log::debug($tweet);
+
+        return responce()->json(
+            ['update_tweet' => $tweet->text],
+            200, [],
+            JSON_UNESCAPED_UNICODE);
+
+    }
+
 }

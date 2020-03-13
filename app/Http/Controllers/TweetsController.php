@@ -62,7 +62,7 @@ class TweetsController extends Controller
      */
     public function edit($id)
     {
-        //
+        return view('tweets.edit');
     }
 
     /**

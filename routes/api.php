@@ -16,4 +16,4 @@ use Illuminate\Http\Request;
 Route::get('/tweets','ApiController@tweets');
 Route::get('/tweets/{tweet}','ApiController@tweet_get');
 Route::post('/tweet','ApiController@tweet_post')->middleware('auth:api');
-
+Route::put('/tweets/{tweet}','ApiController@tweet_update')->middleware('auth:api');
